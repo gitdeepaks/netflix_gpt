@@ -5,6 +5,11 @@
 - Configure Router
 - Build Header
 - Build Login Form
+- Form Validation
+- useRef Hook
+- Firebase Setup
+- Deoployinh app to production
+- Create Signup user Account
 
 # Features
 
