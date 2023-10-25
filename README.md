@@ -2,6 +2,9 @@
 
 - Create Tract App
 - Configure TailwindCSS
+- Configure Router
+- Build Header
+- Build Login Form
 
 # Features
 
