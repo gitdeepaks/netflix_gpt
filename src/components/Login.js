@@ -1,6 +1,5 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
-import { useState } from "react";
 import { checkValidData } from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
@@ -23,18 +22,16 @@ const Login = () => {
   };
 
   const handleButtonClick = () => {
-    //   validate the formData
-
     const message = checkValidData(
       emailRef.current.value,
       password.current.value,
-      isSignInForm ? null : name.current.value
+      name.current.value,
+      !isSignInForm
     );
     setErrorMessage(message);
 
     if (message) return;
 
-    // sign in / sign up Logic
     if (!isSignInForm) {
       // signUp Logic
       createUserWithEmailAndPassword(
@@ -43,7 +40,6 @@ const Login = () => {
         password.current.value
       )
         .then((userCredential) => {
-          // Signed up
           const user = userCredential.user;
           console.log(user);
           navigate("/browse");
@@ -61,12 +57,9 @@ const Login = () => {
         password.current.value
       )
         .then((userCredential) => {
-          // Signed in
           const user = userCredential.user;
           console.log(user);
-
           navigate("/browse");
-          // ...
         })
         .catch((error) => {
           const errorCode = error.code;
