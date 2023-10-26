@@ -8,8 +8,10 @@ export const checkValidData = (email, password, name) => {
       password
     );
 
+  const isNameValid = name.length > 3;
+
   if (!isEmailValid) return "Email is not valid";
   if (!isPasswordValid) return "Password is not valid";
-
+  if (!isNameValid) return "Name is not valid";
   return null;
 };
