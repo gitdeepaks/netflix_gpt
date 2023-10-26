@@ -10,6 +10,8 @@
 - Firebase Setup
 - Deoployinh app to production
 - Create Signup user Account
+- Create Signin user API
+- Created Redux Store with User Slice
 
 # Features
 

@@ -2,15 +2,20 @@ import React, { useRef } from "react";
 import Header from "./Header";
 import { useState } from "react";
 import { checkValidData } from "../utils/validate";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
 
   const name = useRef(null);
-  const email = useRef(null);
+  const emailRef = useRef(null);
   const password = useRef(null);
 
   const toggleSignInForm = () => {
@@ -21,9 +26,9 @@ const Login = () => {
     //   validate the formData
 
     const message = checkValidData(
-      email.current.value,
+      emailRef.current.value,
       password.current.value,
-      name.current.value
+      isSignInForm ? null : name.current.value
     );
     setErrorMessage(message);
 
@@ -32,31 +37,43 @@ const Login = () => {
     // sign in / sign up Logic
     if (!isSignInForm) {
       // signUp Logic
-
       createUserWithEmailAndPassword(
         auth,
-        email.current.value,
+        emailRef.current.value,
         password.current.value
-      ).then((userCredential) => {
-        // Signed up
-        createUserWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            // Signed up
-            const user = userCredential.user;
-            console.log(user);
-
-            // ...
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            setErrorMessage(errorCode + " " + errorMessage);
-          });
-      });
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
     } else {
-    }
+      //signin logic
+      signInWithEmailAndPassword(
+        auth,
+        emailRef.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
 
-    //   singnIn / signUp
+          navigate("/browse");
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
+    }
   };
   return (
     <div>
@@ -83,8 +100,8 @@ const Login = () => {
           />
         )}
         <input
-          ref={email}
-          type="text"
+          ref={emailRef}
+          type="email"
           placeholder="Email Address"
           className="p-4 my-4 w-full bg-gray-700"
         />
