@@ -22,10 +22,22 @@ const Login = () => {
   };
 
   const handleButtonClick = () => {
+    // Use optional chaining to safely access the value
+    const userEmail = emailRef.current?.value;
+    const userPassword = password.current?.value;
+
+    // Only try to access the name value if the sign-up form is active
+    const userName = isSignInForm ? null : name.current?.value;
+
+    if (!userEmail || !userPassword || (!isSignInForm && !userName)) {
+      setErrorMessage("Please fill in all required fields");
+      return;
+    }
+
     const message = checkValidData(
-      emailRef.current.value,
-      password.current.value,
-      name.current.value,
+      userEmail,
+      userPassword,
+      userName,
       !isSignInForm
     );
     setErrorMessage(message);
@@ -34,11 +46,7 @@ const Login = () => {
 
     if (!isSignInForm) {
       // signUp Logic
-      createUserWithEmailAndPassword(
-        auth,
-        emailRef.current.value,
-        password.current.value
-      )
+      createUserWithEmailAndPassword(auth, userEmail, userPassword)
         .then((userCredential) => {
           const user = userCredential.user;
           console.log(user);
@@ -51,11 +59,7 @@ const Login = () => {
         });
     } else {
       //signin logic
-      signInWithEmailAndPassword(
-        auth,
-        emailRef.current.value,
-        password.current.value
-      )
+      signInWithEmailAndPassword(auth, userEmail, userPassword)
         .then((userCredential) => {
           const user = userCredential.user;
           console.log(user);
@@ -68,6 +72,7 @@ const Login = () => {
         });
     }
   };
+
   return (
     <div>
       <Header />
