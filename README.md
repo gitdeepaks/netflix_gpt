@@ -12,6 +12,9 @@
 - Create Signup user Account
 - Create Signin user API
 - Created Redux Store with User Slice
+- Implemented SignOut
+- Update Profile Api Call
+- Feth movies from TMDB
 
 # Features
 

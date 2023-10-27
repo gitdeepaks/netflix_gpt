@@ -4,14 +4,18 @@ import { checkValidData } from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const name = useRef(null);
   const emailRef = useRef(null);
@@ -49,8 +53,26 @@ const Login = () => {
       createUserWithEmailAndPassword(auth, userEmail, userPassword)
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL:
+              "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIgAAACICAMAAAALZFNgAAAAY1BMVEUNfoD///8AeXsAdnj0+Pj6/f0Ac3UAbG+Qt7gAfH+51dXw9/fj7u7n8fGbxMWIt7h1rK1RmZsxiowkf4Fho6RrpafE3Nyty8zN4+OVv79Aj5CJsrMchIaozc6iwsN7q6zY6emh8HiqAAACWUlEQVR4nO3Z7ZaaMBAGYJiBaAJiEhEVUbj/q2ysHw22anBjT/f0ffZ3Zl8gGUhMEgAAAAAAAAAAgG9Iyn+hItHK2hVRvBSXihOziFoVaVqoNUeKIUk3eZoulBEToshkk16oJMoDkt32WnE3oSCr9EZFCbLa/qp4DL7LtEw9uwhPhw9+xXXozBMLf1jx9RyyzfyKQ+ClSZumb13AQ7QfV+zCHjfPx8OqLwcZP5ngS+Nj9CDqrSCkowepxhXrsIqye2vYE9SPK4b2JjH4o8oIbb4brUMV2hBo7Q/TMfqI35lyE9wjhTeuivK2IW/daBE8zL2hivOgYhnp/cvVpactpk05tvMmy4ZdO/W1/bii2ZVZ1uztxCuTLGazGUf8NpLsCoqIHzgAAAAA3138g6i3ELUmifuZRm+ca0lqVZENJmISmSyrnqcVJDbN+UvexsvRlq7gUIffFcmJ3ubTduEBxHnDlDeGgjYc5PYn3kZWRwvCxbXmdt/x8yySqesbfxc7YdP5ir9Pz1Tf0oMwkjgxy2Z0cpXmOt4KvjuMKprKdCzYPacrIhYiabUa8nRMxVw0CfXFXf180RzmfW1aa21r6n5eqTJL72UbO+XENySJ3dxH+Rknzwr3l9/fhrNFFW8zfSO5Pfx+xc+c5vVH+rsUXmt4meLYfnIHztJU5css2VAZ+ZmbcSMls1uff5ouF6Vb3YL/yjtXspBWb5rBTdLb/3ezttw2u9Oqjj8/n4VxLa2zbb3W8xOt3TpeJfyi6X4wjutjJ3RqbXF+6gEAAAAAAAAAAAAAAID/yA/BjxhlYV0/MgAAAABJRU5ErkJggg==",
+          })
+            .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+              navigate("/browse");
+            })
+            .catch((error) => {
+              setErrorMessage(error.code + "-" + error.message);
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
