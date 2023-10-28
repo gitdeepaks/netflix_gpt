@@ -15,6 +15,8 @@
 - Implemented SignOut
 - Update Profile Api Call
 - Feth movies from TMDB
+- unsubscribe to the onAuthStateChanged callback
+- Added hardcoded values in constants file
 
 # Features
 

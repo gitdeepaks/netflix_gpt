@@ -4,6 +4,7 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
+import { LOGO } from "../utils/constants";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const Header = () => {
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email, displayName, photoURL } = user;
         dispatch(
@@ -35,14 +36,11 @@ const Header = () => {
         navigate("/");
       }
     });
+    return () => unsubscribe();
   }, []);
   return (
     <div className="absolute flex justify-between w-screen px-8 py-2 bg-gradient-to-b from-black z-10">
-      <img
-        className="w-40"
-        src="https://www.freepnglogos.com/uploads/netflix-logo-0.png"
-        alt="Netflix Logo"
-      />
+      <img className="w-40" src={LOGO} alt="Netflix Logo" />
       {user && (
         <div className="flex p-4">
           <img className="w-12 h-12 " alt="userIcon" src={user?.photoURL} />
