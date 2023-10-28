@@ -17,6 +17,9 @@
 - Feth movies from TMDB
 - unsubscribe to the onAuthStateChanged callback
 - Added hardcoded values in constants file
+- Register for TMDB API
+- GET ACCESS TOKEN
+- Get data from TMDB now playing movies
 
 # Features
 
