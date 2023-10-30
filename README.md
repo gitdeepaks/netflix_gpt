@@ -20,6 +20,12 @@
 - Register for TMDB API
 - GET ACCESS TOKEN
 - Get data from TMDB now playing movies
+- customHook for now Playing Movies
+- create a movieSlice
+- update Store with Data
+- Planning for MaiContainer & secondary container
+- Update Store with Trailer Video Data
+- Embed Trailer Video
 
 # Features
 
