@@ -26,6 +26,7 @@
 - Planning for MaiContainer & secondary container
 - Update Store with Trailer Video Data
 - Embed Trailer Video
+- Build Secondary Componenet
 
 # Features
 
