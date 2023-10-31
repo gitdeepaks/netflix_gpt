@@ -4,8 +4,9 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
-import { LOGO } from "../utils/constants";
+import { LOGO, Supportedlanguages } from "../utils/constants";
 import { toggleGptSearchView } from "../utils/gptSlice";
+import { setLanguage } from "../utils/configSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -45,11 +46,27 @@ const Header = () => {
     dispatch(toggleGptSearchView());
   };
 
+  const hangleLanguageChange = (e) => {
+    const language = e.target.value;
+    // console.log(language);
+    dispatch(setLanguage(language));
+  };
+
   return (
     <div className="absolute flex justify-between w-screen px-8 py-2 bg-gradient-to-b from-black z-10">
       <img className="w-40 h-14" src={LOGO} alt="Netflix Logo" />
       {user && (
-        <div className="flex p-2s">
+        <div className="flex p-2">
+          <select
+            className=" py-2 bg-gray-800 text-white px-4 mx-4 my-2 rounded-lg bg-transparent"
+            onChange={hangleLanguageChange}
+          >
+            {Supportedlanguages.map((language) => (
+              <option key={language.identifier} value={language.identifier}>
+                {language.name}
+              </option>
+            ))}
+          </select>
           <button
             className="py-2 px-4 mx-4 my-2 bg-rose-700 text-white rounded-lg"
             onClick={handleGptSearchClick}
