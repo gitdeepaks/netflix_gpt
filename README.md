@@ -27,6 +27,10 @@
 - Update Store with Trailer Video Data
 - Embed Trailer Video
 - Build Secondary Componenet
+- Build MovieList
+- Build MovieCard
+- TMDB Image CDN Found
+- Added horizontal scroll
 
 # Features
 
