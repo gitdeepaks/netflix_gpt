@@ -31,6 +31,7 @@
 - Build MovieCard
 - TMDB Image CDN Found
 - Added horizontal scroll
+- GPT Seraach Bar Feature
 
 # Features
 
