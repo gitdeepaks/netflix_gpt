@@ -31,3 +31,6 @@ export const Supportedlanguages = [
     name: "Spanish",
   },
 ];
+
+export const OPEN_AI_API_KEY =
+  "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";
