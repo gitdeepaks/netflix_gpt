@@ -1,10 +1,14 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import { addTrailerVideos } from "../utils/moviesSlice";
 import { useEffect } from "react";
 
 const useMoviesTrailer = (movieId) => {
   const dispath = useDispatch();
+
+  const trailerVideos = useSelector((store) => store.movies.trailerVideos);
+
+  // implement memoization for fetch
 
   // fetch trailer videos && updating the store with trailer videos data
 
@@ -21,7 +25,7 @@ const useMoviesTrailer = (movieId) => {
   };
 
   useEffect(() => {
-    getMovieVideos();
+    !trailerVideos && getMovieVideos();
   }, []);
 };
 
