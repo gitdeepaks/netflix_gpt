@@ -31,7 +31,10 @@
 - Build MovieCard
 - TMDB Image CDN Found
 - Added horizontal scroll
-- GPT Seraach Bar Feature
+- GPT Search Bar Feature
+- Added Miltilanguage Feature
+- Added Movie Suggestions Feature using GPT API
+- Integrate OpenAI API
 
 # Features
 
