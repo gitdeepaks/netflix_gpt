@@ -34,7 +34,7 @@ const GptSearchBar = () => {
     const gptQuery =
       "Act as a Movie Search Engine and find best results for a user query" +
       searchText.current.value +
-      "Only Give me List of bestest 5 Movies only , comma seperated like the example result below. Example Results are : Gadar, Don, Sholay, DDLJ, Kuch Kuch Hota Hai,Golmaal, Koi Mil Gaya ";
+      "Give me List of bestest 5 Movies only, do not give the promps like 'Here are the top 5 comedy movies:' , comma seperated like the example result below. Example Results are : Gadar, Don, Sholay, DDLJ, Kuch Kuch Hota Hai,Golmaal, Koi Mil Gaya ";
 
     const gptResults = await openai.chat.completions.create({
       messages: [{ role: "user", content: gptQuery }],
