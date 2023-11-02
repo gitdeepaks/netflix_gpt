@@ -59,7 +59,7 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute cursor-pointer flex justify-between w-screen px-8 py-2 bg-gradient-to-b from-black z-10">
+    <div className="absolute cursor-pointer flex justify-between w-screen px-4 sm:px-8 py-1 sm:py-2 bg-gradient-to-b from-black z-10">
       <img
         className="w-40 h-14"
         src={LOGO}
@@ -70,7 +70,7 @@ const Header = () => {
         <div className="flex p-2">
           {showGptSearch && (
             <select
-              className=" py-2 bg-gray-800 text-white px-4 mx-4 my-2 rounded-lg bg-transparent"
+              className=" py-1 sm:py-2 bg-gray-800 text-white px-4 mx-4 my-2 rounded-lg bg-transparent"
               onChange={hangleLanguageChange}
             >
               {Supportedlanguages.map((language) => (
@@ -81,7 +81,7 @@ const Header = () => {
             </select>
           )}
           <button
-            className="py-2 px-4 mx-4 my-2 bg-rose-700 text-white rounded-lg"
+            className="py-1 sm:py-2 px-4 mx-4 my-2 bg-rose-700 text-white rounded-lg"
             onClick={handleGptSearchClick}
           >
             {showGptSearch ? "HomePage" : "GPT Search"}

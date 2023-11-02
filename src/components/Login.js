@@ -108,27 +108,27 @@ const Login = () => {
             ref={name}
             type="text"
             placeholder="Full Name"
-            className="p-4 my-4 w-full bg-gray-700"
+            className="p-4 my-4 w-full sm:w-auto bg-gray-700"
           />
         )}
         <input
           ref={emailRef}
           type="email"
           placeholder="Email Address"
-          className="p-4 my-4 w-full bg-gray-700"
+          className="p-4 my-4 w-full sm:w-auto bg-gray-700"
         />
         <input
           ref={password}
           type="password"
           placeholder="Password"
-          className="p-4 my-4 w-full bg-gray-700"
+          className="p-4 my-4 w-full sm:w-auto bg-gray-700"
         />
 
-        <p className="text-red-500 font-bold text-lg py-2">{errorMessage}</p>
+        <p className="text-red-500 font-bold text-base sm:text-lg py-1 sm:py-2">{errorMessage}</p>
 
         <button
           type="submit"
-          className="p-4 my-6 bg-red-700 w-full rounded-lg"
+          className="p-4 my-6 bg-red-700 w-full sm:w-auto rounded-lg"
           onClick={handleButtonClick}
         >
           {isSignInForm ? "SignIn" : "SignUp"}
