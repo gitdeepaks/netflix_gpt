@@ -98,9 +98,9 @@ const Login = () => {
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="w-3/12 absolute p-12 bg-black mt-36 mx-auto right-0 left-0 text-white bg-opacity-80 rounded-lg"
+        className="w-full sm:w-11/12 md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto absolute left-0 right-0 top-1/2 transform -translate-y-1/2 p-8 bg-black text-white bg-opacity-90 rounded-lg shadow-xl"
       >
-        <h1 className="font-bold text-3xl py-4">
+        <h1 className="text-center font-bold text-3xl mb-6">
           {isSignInForm ? "SignIn" : "SignUp"}
         </h1>
         {!isSignInForm && (
@@ -108,35 +108,42 @@ const Login = () => {
             ref={name}
             type="text"
             placeholder="Full Name"
-            className="p-4 my-4 w-full sm:w-auto bg-gray-700"
+            className="p-3 w-full bg-gray-800 rounded-md text-white mb-4"
           />
         )}
         <input
           ref={emailRef}
           type="email"
           placeholder="Email Address"
-          className="p-4 my-4 w-full sm:w-auto bg-gray-700"
+          className="p-3 w-full bg-gray-800 rounded-md text-white mb-4"
         />
         <input
           ref={password}
           type="password"
           placeholder="Password"
-          className="p-4 my-4 w-full sm:w-auto bg-gray-700"
+          className="p-3 w-full bg-gray-800 rounded-md text-white mb-4"
         />
 
-        <p className="text-red-500 font-bold text-base sm:text-lg py-1 sm:py-2">{errorMessage}</p>
+        {errorMessage && (
+          <p className="text-red-500 text-center font-bold mb-4">
+            {errorMessage}
+          </p>
+        )}
 
         <button
           type="submit"
-          className="p-4 my-6 bg-red-700 w-full sm:w-auto rounded-lg"
+          className="p-3 w-full bg-red-600 hover:bg-red-700 rounded-md transition duration-300"
           onClick={handleButtonClick}
         >
           {isSignInForm ? "SignIn" : "SignUp"}
         </button>
-        <p className="py-4 cursor-pointer" onClick={toggleSignInForm}>
+        <p
+          className="text-center text-sm mt-6 cursor-pointer hover:underline"
+          onClick={toggleSignInForm}
+        >
           {isSignInForm
-            ? "New to Netflix? Sign up now"
-            : "Already a registered user? Sign in now"}
+            ? "New to Netflix? Sign up now."
+            : "Already a registered user? Sign in now."}
         </p>
       </form>
     </div>
