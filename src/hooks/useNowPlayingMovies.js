@@ -4,7 +4,7 @@ import { addNowPlayingMovies } from "../utils/moviesSlice";
 import { useEffect } from "react";
 
 const useNowPlayingMovies = () => {
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
 
   const nowPlayingMovies = useSelector(
     (store) => store.movies.nowPlayingMovies
@@ -16,11 +16,11 @@ const useNowPlayingMovies = () => {
     );
     const json = await data.json();
 
-    dispath(addNowPlayingMovies(json.results));
+    dispatch(addNowPlayingMovies(json.results));
   };
 
   useEffect(() => {
-    !nowPlayingMovies && getNowPLayingMovies();
+    getNowPLayingMovies();
   }, []);
 };
 

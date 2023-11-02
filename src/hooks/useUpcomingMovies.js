@@ -4,7 +4,7 @@ import { addUpcomingMovies } from "../utils/moviesSlice";
 import { useEffect } from "react";
 
 const useUpcomingMovies = () => {
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
 
   const getUpcomingMovies = async () => {
     const data = await fetch(
@@ -13,7 +13,7 @@ const useUpcomingMovies = () => {
     );
     const json = await data.json();
 
-    dispath(addUpcomingMovies(json.results));
+    dispatch(addUpcomingMovies(json.results));
   };
 
   useEffect(() => {
