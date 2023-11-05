@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 export const LOGO = "https://www.freepnglogos.com/uploads/netflix-logo-0.png";
 
 export const USER_AVATAR =
